@@ -67,7 +67,7 @@ def runGDR(adata,
             print('Number of clusters: ',len(np.unique(adata.obs[groupby])))
             
         ### Run marker gene identification
-        if layer is None:
+        if layer is not None:
             cosg.cosg(adata,
                 key_added='cosg',
                 use_raw=False,
@@ -77,7 +77,7 @@ def runGDR(adata,
                 remove_lowly_expressed=True,
                 n_genes_user=n_gene,
                 groupby=groupby
-                     )
+                )
         else:
             cosg.cosg(adata,
                 key_added='cosg',
@@ -86,7 +86,7 @@ def runGDR(adata,
                 remove_lowly_expressed=True,
                 n_genes_user=n_gene,
                 groupby=groupby
-                     )
+                )
         
         marker_gene=pd.DataFrame(adata.uns['cosg']['names'])
 
@@ -167,7 +167,7 @@ def runGDR(adata,
                 print('Processing the batch ', batch_i ,' which contains ',len(np.unique(adata_i.obs[groupby_i])), ' clusters.')
             cellbarcode_info.append(adata_i.obs_names.values)
             ### Run marker gene identification
-            if layer is None:
+            if layer is not None:
                 cosg.cosg(adata_i,
                     key_added='cosg',
                     use_raw=False,
@@ -177,7 +177,7 @@ def runGDR(adata,
                     remove_lowly_expressed=True,
                     n_genes_user=n_gene,
                     groupby=groupby_i
-                         )
+                    )
             else:
                 cosg.cosg(adata_i,
                     key_added='cosg',
@@ -186,7 +186,7 @@ def runGDR(adata,
                     remove_lowly_expressed=True,
                     n_genes_user=n_gene,
                     groupby=groupby_i
-                         )
+                    )
 
             marker_gene=pd.DataFrame(adata_i.uns['cosg']['names'])
             
